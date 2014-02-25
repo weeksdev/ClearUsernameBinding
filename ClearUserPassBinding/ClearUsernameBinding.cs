@@ -28,6 +28,9 @@ namespace WebServices20.BindingExtenions
             res.Add(new TextMessageEncodingBindingElement() { MessageVersion = this.messageVersion});
             res.Add(SecurityBindingElement.CreateUserNameOverTransportBindingElement());
             res.Add(new AutoSecuredHttpTransportElement());
+            //removing timestamp element because of issues with non .net web services
+            //http://kjellsj.blogspot.com/2008/03/wcf-ws-security-ssl-transportwithmessag.html
+            res.Find<SecurityBindingElement>().IncludeTimestamp = false;
             return res;
         }
 
